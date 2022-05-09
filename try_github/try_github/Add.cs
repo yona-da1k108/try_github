@@ -8,5 +8,9 @@ using System.Threading.Tasks;
 
     internal class Add
     {
+    public int add(int a, int b)
+    {
+        return a + b;
     }
+}
 
