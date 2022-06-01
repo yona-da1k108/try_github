@@ -11,55 +11,55 @@ namespace ThanksCardServer2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class MidlesController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
-        public EmployeesController(ApplicationContext context)
+        public MidlesController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: api/Employees
+        // GET: api/Midles
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<Midle>>> GetMidles()
         {
-          if (_context.Employees == null)
+          if (_context.Midles == null)
           {
               return NotFound();
           }
-            return await _context.Employees.ToListAsync();
+            return await _context.Midles.ToListAsync();
         }
 
-        // GET: api/Employees/5
+        // GET: api/Midles/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployee(long id)
+        public async Task<ActionResult<Midle>> GetMidle(long id)
         {
-          if (_context.Employees == null)
+          if (_context.Midles == null)
           {
               return NotFound();
           }
-            var employee = await _context.Employees.FindAsync(id);
+            var midle = await _context.Midles.FindAsync(id);
 
-            if (employee == null)
+            if (midle == null)
             {
                 return NotFound();
             }
 
-            return employee;
+            return midle;
         }
 
-        // PUT: api/Employees/5
+        // PUT: api/Midles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(long id, Employee employee)
+        public async Task<IActionResult> PutMidle(long id, Midle midle)
         {
-            if (id != employee.Id)
+            if (id != midle.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(employee).State = EntityState.Modified;
+            _context.Entry(midle).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace ThanksCardServer2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeExists(id))
+                if (!MidleExists(id))
                 {
                     return NotFound();
                 }
@@ -80,44 +80,44 @@ namespace ThanksCardServer2.Controllers
             return NoContent();
         }
 
-        // POST: api/Employees
+        // POST: api/Midles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        public async Task<ActionResult<Midle>> PostMidle(Midle midle)
         {
-          if (_context.Employees == null)
+          if (_context.Midles == null)
           {
-              return Problem("Entity set 'ApplicationContext.Employees'  is null.");
+              return Problem("Entity set 'ApplicationContext.Midles'  is null.");
           }
-            _context.Employees.Add(employee);
+            _context.Midles.Add(midle);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
+            return CreatedAtAction("GetMidle", new { id = midle.Id }, midle);
         }
 
-        // DELETE: api/Employees/5
+        // DELETE: api/Midles/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployee(long id)
+        public async Task<IActionResult> DeleteMidle(long id)
         {
-            if (_context.Employees == null)
+            if (_context.Midles == null)
             {
                 return NotFound();
             }
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee == null)
+            var midle = await _context.Midles.FindAsync(id);
+            if (midle == null)
             {
                 return NotFound();
             }
 
-            _context.Employees.Remove(employee);
+            _context.Midles.Remove(midle);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool EmployeeExists(long id)
+        private bool MidleExists(long id)
         {
-            return (_context.Employees?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Midles?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

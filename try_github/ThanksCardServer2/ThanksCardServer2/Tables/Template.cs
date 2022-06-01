@@ -1,12 +1,11 @@
 ﻿#nullable disable
-using System.ComponentModel.DataAnnotations;
+using ThanksCardServer2.Models;
 
 namespace ThanksCardServer2.Models
 {
     public class Template
     {
-        [Key]
-        public long Template_Id { get; set; }
+        public long Id { get; set; }
 
         public string Template_Name { get; set; }
         public string Template_Content { get; set; }

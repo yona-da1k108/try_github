@@ -11,55 +11,55 @@ namespace ThanksCardServer2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class RepliesController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
-        public EmployeesController(ApplicationContext context)
+        public RepliesController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: api/Employees
+        // GET: api/Replies
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<Reply>>> GetReplys()
         {
-          if (_context.Employees == null)
+          if (_context.Replys == null)
           {
               return NotFound();
           }
-            return await _context.Employees.ToListAsync();
+            return await _context.Replys.ToListAsync();
         }
 
-        // GET: api/Employees/5
+        // GET: api/Replies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> GetEmployee(long id)
+        public async Task<ActionResult<Reply>> GetReply(int id)
         {
-          if (_context.Employees == null)
+          if (_context.Replys == null)
           {
               return NotFound();
           }
-            var employee = await _context.Employees.FindAsync(id);
+            var reply = await _context.Replys.FindAsync(id);
 
-            if (employee == null)
+            if (reply == null)
             {
                 return NotFound();
             }
 
-            return employee;
+            return reply;
         }
 
-        // PUT: api/Employees/5
+        // PUT: api/Replies/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(long id, Employee employee)
+        public async Task<IActionResult> PutReply(int id, Reply reply)
         {
-            if (id != employee.Id)
+            if (id != reply.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(employee).State = EntityState.Modified;
+            _context.Entry(reply).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace ThanksCardServer2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeExists(id))
+                if (!ReplyExists(id))
                 {
                     return NotFound();
                 }
@@ -80,44 +80,44 @@ namespace ThanksCardServer2.Controllers
             return NoContent();
         }
 
-        // POST: api/Employees
+        // POST: api/Replies
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        public async Task<ActionResult<Reply>> PostReply(Reply reply)
         {
-          if (_context.Employees == null)
+          if (_context.Replys == null)
           {
-              return Problem("Entity set 'ApplicationContext.Employees'  is null.");
+              return Problem("Entity set 'ApplicationContext.Replys'  is null.");
           }
-            _context.Employees.Add(employee);
+            _context.Replys.Add(reply);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
+            return CreatedAtAction("GetReply", new { id = reply.Id }, reply);
         }
 
-        // DELETE: api/Employees/5
+        // DELETE: api/Replies/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployee(long id)
+        public async Task<IActionResult> DeleteReply(int id)
         {
-            if (_context.Employees == null)
+            if (_context.Replys == null)
             {
                 return NotFound();
             }
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee == null)
+            var reply = await _context.Replys.FindAsync(id);
+            if (reply == null)
             {
                 return NotFound();
             }
 
-            _context.Employees.Remove(employee);
+            _context.Replys.Remove(reply);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool EmployeeExists(long id)
+        private bool ReplyExists(int id)
         {
-            return (_context.Employees?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Replys?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

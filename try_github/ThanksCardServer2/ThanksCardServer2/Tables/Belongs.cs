@@ -1,15 +1,13 @@
 ﻿#nullable disable
-using System.ComponentModel.DataAnnotations;
+using ThanksCardServer2.Models;
 
 namespace ThanksCardServer2.Models
 {
-    public class Belongs
+    public class Belong
     {
-        [Key]
-        public long Belongs_Id { get; set; }
-
-        public string Belongs_Name { get; set; }
-        public long Belongssonzai_id { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public long sonzai_id { get; set; }
         public long Parent_Id { get; set; }
     }
 }

@@ -22,44 +22,44 @@ namespace ThanksCardServer2.Controllers
 
         // GET: api/Belongs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Belongs>>> Getbelongs()
+        public async Task<ActionResult<IEnumerable<Belong>>> GetBelongs()
         {
-          if (_context.belongs == null)
+          if (_context.Belongs == null)
           {
               return NotFound();
           }
-            return await _context.belongs.ToListAsync();
+            return await _context.Belongs.ToListAsync();
         }
 
         // GET: api/Belongs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Belongs>> GetBelongs(long id)
+        public async Task<ActionResult<Belong>> GetBelong(long id)
         {
-          if (_context.belongs == null)
+          if (_context.Belongs == null)
           {
               return NotFound();
           }
-            var belongs = await _context.belongs.FindAsync(id);
+            var belong = await _context.Belongs.FindAsync(id);
 
-            if (belongs == null)
+            if (belong == null)
             {
                 return NotFound();
             }
 
-            return belongs;
+            return belong;
         }
 
         // PUT: api/Belongs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBelongs(long id, Belongs belongs)
+        public async Task<IActionResult> PutBelong(long id, Belong belong)
         {
-            if (id != belongs.Belongs_Id)
+            if (id != belong.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(belongs).State = EntityState.Modified;
+            _context.Entry(belong).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace ThanksCardServer2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BelongsExists(id))
+                if (!BelongExists(id))
                 {
                     return NotFound();
                 }
@@ -83,41 +83,41 @@ namespace ThanksCardServer2.Controllers
         // POST: api/Belongs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Belongs>> PostBelongs(Belongs belongs)
+        public async Task<ActionResult<Belong>> PostBelong(Belong belong)
         {
-          if (_context.belongs == null)
+          if (_context.Belongs == null)
           {
-              return Problem("Entity set 'ApplicationContext.belongs'  is null.");
+              return Problem("Entity set 'ApplicationContext.Belongs'  is null.");
           }
-            _context.belongs.Add(belongs);
+            _context.Belongs.Add(belong);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBelongs", new { id = belongs.Belongs_Id }, belongs);
+            return CreatedAtAction("GetBelong", new { id = belong.Id }, belong);
         }
 
         // DELETE: api/Belongs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBelongs(long id)
+        public async Task<IActionResult> DeleteBelong(long id)
         {
-            if (_context.belongs == null)
+            if (_context.Belongs == null)
             {
                 return NotFound();
             }
-            var belongs = await _context.belongs.FindAsync(id);
-            if (belongs == null)
+            var belong = await _context.Belongs.FindAsync(id);
+            if (belong == null)
             {
                 return NotFound();
             }
 
-            _context.belongs.Remove(belongs);
+            _context.Belongs.Remove(belong);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool BelongsExists(long id)
+        private bool BelongExists(long id)
         {
-            return (_context.belongs?.Any(e => e.Belongs_Id == id)).GetValueOrDefault();
+            return (_context.Belongs?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
