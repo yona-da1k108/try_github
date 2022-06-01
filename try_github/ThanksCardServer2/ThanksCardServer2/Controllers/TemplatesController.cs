@@ -54,7 +54,7 @@ namespace ThanksCardServer2.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTemplate(long id, Template template)
         {
-            if (id != template.Template_Id)
+            if (id != template.Id)
             {
                 return BadRequest();
             }
@@ -92,7 +92,7 @@ namespace ThanksCardServer2.Controllers
             _context.Templates.Add(template);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTemplate", new { id = template.Template_Id }, template);
+            return CreatedAtAction("GetTemplate", new { id = template.Id }, template);
         }
 
         // DELETE: api/Templates/5
@@ -117,7 +117,7 @@ namespace ThanksCardServer2.Controllers
 
         private bool TemplateExists(long id)
         {
-            return (_context.Templates?.Any(e => e.Template_Id == id)).GetValueOrDefault();
+            return (_context.Templates?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

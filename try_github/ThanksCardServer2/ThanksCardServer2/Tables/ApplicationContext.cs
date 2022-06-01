@@ -1,6 +1,5 @@
 ﻿#nullable disable
 using Microsoft.EntityFrameworkCore;
-using ThanksCardServer2.Tables;
 
 namespace ThanksCardServer2.Models
 {
@@ -10,13 +9,13 @@ namespace ThanksCardServer2.Models
             : base(options)
         {
         }
-
+        public DbSet<Belong> Belongs { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Belongs> Belongs { get; set; }
         public DbSet<ThanksCard> ThanksCards { get; set; }
         public DbSet<Title> Titles { get; set; }    
         public DbSet<Template> Templates { get; set; }
-        public DbSet<Reply> Replies { get; set; }
+        public DbSet<Midle>Midles { get; set; }
+        public DbSet<Reply> Replys { get; set; }
     }
 }
 

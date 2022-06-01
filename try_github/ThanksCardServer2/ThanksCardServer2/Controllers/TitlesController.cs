@@ -54,7 +54,7 @@ namespace ThanksCardServer2.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTitle(long id, Title title)
         {
-            if (id != title.Title_Id)
+            if (id != title.Id)
             {
                 return BadRequest();
             }
@@ -92,7 +92,7 @@ namespace ThanksCardServer2.Controllers
             _context.Titles.Add(title);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTitle", new { id = title.Title_Id }, title);
+            return CreatedAtAction("GetTitle", new { id = title.Id }, title);
         }
 
         // DELETE: api/Titles/5
@@ -117,7 +117,7 @@ namespace ThanksCardServer2.Controllers
 
         private bool TitleExists(long id)
         {
-            return (_context.Titles?.Any(e => e.Title_Id == id)).GetValueOrDefault();
+            return (_context.Titles?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

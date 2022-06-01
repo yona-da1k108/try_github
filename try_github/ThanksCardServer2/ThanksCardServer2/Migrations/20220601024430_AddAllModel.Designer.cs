@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ThanksCardServer2.Models;
@@ -11,9 +12,10 @@ using ThanksCardServer2.Models;
 namespace ThanksCardServer2.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220601024430_AddAllModel")]
+    partial class AddAllModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,35 +101,6 @@ namespace ThanksCardServer2.Migrations
                     b.HasIndex("ThanksCardId");
 
                     b.ToTable("Midles");
-                });
-
-            modelBuilder.Entity("ThanksCardServer2.Models.Reply", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .HasColumnType("text");
-
-                    b.Property<long>("EmployeeId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Sonzai_Id")
-                        .HasColumnType("integer");
-
-                    b.Property<long>("ThanksCardId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("ThanksCardId");
-
-                    b.ToTable("Replys");
                 });
 
             modelBuilder.Entity("ThanksCardServer2.Models.Template", b =>
@@ -233,25 +206,6 @@ namespace ThanksCardServer2.Migrations
                     b.HasOne("ThanksCardServer2.Models.ThanksCard", "ThanksCard")
                         .WithMany()
                         .HasForeignKey("ThanksCardId");
-
-                    b.Navigation("ThanksCard");
-                });
-
-            modelBuilder.Entity("ThanksCardServer2.Models.Reply", b =>
-                {
-                    b.HasOne("ThanksCardServer2.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ThanksCardServer2.Models.ThanksCard", "ThanksCard")
-                        .WithMany()
-                        .HasForeignKey("ThanksCardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
 
                     b.Navigation("ThanksCard");
                 });
